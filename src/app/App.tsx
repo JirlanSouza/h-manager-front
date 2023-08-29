@@ -1,5 +1,14 @@
-import {JSX} from "react";
+import { JSX } from "react";
+import { Layout } from "./Layout.tsx";
+import { ColorModeContextProvider } from "./contexts/colorModeContext.tsx";
+import { SettingsService } from "./service/settingsService.ts";
+
+const settingsService = new SettingsService();
 
 export function App(): JSX.Element {
-    return <><h1>H manager</h1></>
+    return (
+        <ColorModeContextProvider settingsService={settingsService}>
+            <Layout settingService={settingsService}></Layout>
+        </ColorModeContextProvider>
+    );
 }

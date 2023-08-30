@@ -1,7 +1,7 @@
 import { JSX } from "react";
+import { ColorModeContextProvider } from "../common/contexts/colorModeContext.tsx";
 import { AppRouter } from "../navigation/routes/AppRouter.tsx";
 import { SettingsService } from "../service/settingsService.ts";
-import { ColorModeContextProvider } from "./contexts/colorModeContext.tsx";
 
 const settingsService = new SettingsService();
 

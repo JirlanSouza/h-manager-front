@@ -9,7 +9,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { styled, useTheme } from "@mui/material/styles";
-import { useColorMode } from "../contexts/colorModeContext.tsx";
+import { useColorMode } from "../../common/contexts/colorModeContext.tsx";
 
 interface AppBarComponentProps {
     open: boolean;

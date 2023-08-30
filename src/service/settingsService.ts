@@ -1,4 +1,4 @@
-import { COLOR_MODE } from "../app/theme/theme";
+import { COLOR_MODE } from "../common/theme/theme";
 
 export class SettingsService {
     private readonly COLOR_MODE_KEY = "app_color_mode";

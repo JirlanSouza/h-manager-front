@@ -11,7 +11,10 @@ interface LayoutProps {
     settingService: SettingsService;
 }
 
-export function Layout({ children, settingService }: LayoutProps): JSX.Element {
+export function AppLayout({
+    children,
+    settingService,
+}: LayoutProps): JSX.Element {
     const theme = useTheme();
     const [open, setOpen] = useState(settingService.getDrawerOpen());
 

@@ -1,10 +1,4 @@
 import {
-    CarCrashRounded,
-    InboxRounded,
-    MailRounded,
-    SatelliteRounded,
-} from "@mui/icons-material";
-import {
     List,
     ListItem,
     ListItemButton,
@@ -14,6 +8,9 @@ import {
 import MuiDrawer, { DrawerProps as MuiDrawerProps } from "@mui/material/Drawer";
 import { CSSObject, Theme, styled, useTheme } from "@mui/material/styles";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { NavigationModel } from "../../navigation/NavigationModel";
+import { navigationList } from "../../navigation/navigationList";
 
 interface DrawerProps extends MuiDrawerProps {
     width: number;
@@ -65,16 +62,15 @@ interface DrawerComponentProps {
     open: boolean;
 }
 
-const menuItems = [
-    { name: "Inbox", icon: InboxRounded },
-    { name: "Starred", icon: MailRounded },
-    { name: "Send email", icon: SatelliteRounded },
-    { name: "Drafts", icon: CarCrashRounded },
-];
-
 export function DrawerComponent({ open }: DrawerComponentProps) {
     const theme = useTheme();
-    const [selectedItem, setSelectedItem] = useState(0);
+    const navigate = useNavigate();
+    const [selectedItem, setSelectedItem] = useState(window.location.pathname);
+
+    function handleItemClick(item: NavigationModel) {
+        setSelectedItem(item.path);
+        navigate(item.path);
+    }
 
     return (
         <Drawer
@@ -89,16 +85,15 @@ export function DrawerComponent({ open }: DrawerComponentProps) {
                     margin: theme.spacing(1),
                 }}
             >
-                {menuItems.map((menuItem, index) => (
+                {navigationList.map((navigationItem) => (
                     <ListItem
-                        key={menuItem.name}
+                        key={navigationItem.path}
                         disablePadding
                         sx={{ display: "block" }}
-                        onClick={() => setSelectedItem(index)}
+                        onClick={() => handleItemClick(navigationItem)}
                     >
                         <ListItemButton
-                            selected={selectedItem === index}
-                            key={menuItem.name}
+                            selected={selectedItem === navigationItem.path}
                             sx={{
                                 minHeight: theme.spacing(3),
                                 minWidth: theme.spacing(3),
@@ -114,10 +109,10 @@ export function DrawerComponent({ open }: DrawerComponentProps) {
                                     justifyContent: "center",
                                 }}
                             >
-                                <menuItem.icon />
+                                <navigationItem.icon />
                             </ListItemIcon>
                             <ListItemText
-                                primary={menuItem.name}
+                                primary={navigationItem.label}
                                 sx={{ opacity: open ? 1 : 0 }}
                             />
                         </ListItemButton>

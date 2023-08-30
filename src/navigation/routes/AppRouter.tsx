@@ -1,6 +1,6 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { AppLayout } from "../../app/AppLayout";
-import { SettingsService } from "../../app/service/settingsService";
+import { SettingsService } from "../../service/settingsService";
 import { navigationList } from "../navigationList";
 
 interface AppRouterProps {

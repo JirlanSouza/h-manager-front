@@ -12,6 +12,13 @@ export function baseComponentStylesCustomizer(theme: Theme) {
                 },
             },
         },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    textTransform: "none",
+                },
+            },
+        },
         MuiIconButton: {
             styleOverrides: {
                 root: {

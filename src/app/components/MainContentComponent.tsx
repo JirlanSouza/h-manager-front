@@ -17,9 +17,9 @@ export function MainContentComponent({ children }: MainContentComponentProps) {
                 marginTop: `calc(${
                     theme.mixins.toolbar.minHeight
                 }px + ${theme.spacing(1)})`,
-                padding: 3,
-                borderTopLeftRadius: theme.spacing(1.5),
-                background: theme.palette.background.default,
+                pr: 1,
+                pb: 1,
+                overflow: "hidden",
             }}
         >
             {children}

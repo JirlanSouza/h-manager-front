@@ -12,15 +12,14 @@ export function MainContentComponent({ children }: MainContentComponentProps) {
     return (
         <Box
             component="main"
-            sx={{
-                flexGrow: 1,
-                marginTop: `calc(${
-                    theme.mixins.toolbar.minHeight
-                }px + ${theme.spacing(1)})`,
-                pr: 1,
-                pb: 1,
-                overflow: "hidden",
-            }}
+            display="flex"
+            flexGrow={1}
+            marginTop={`calc(${
+                theme.mixins.toolbar.minHeight
+            }px + ${theme.spacing(1)})`}
+            pr={1}
+            pb={1}
+            overflow="hidden"
         >
             {children}
         </Box>

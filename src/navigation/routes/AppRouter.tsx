@@ -1,7 +1,7 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { AppLayout } from "../../app/AppLayout";
 import { SettingsService } from "../../service/settingsService";
-import { navigationList } from "../navigationList";
+import { appNavigations } from "../navigations";
 
 interface AppRouterProps {
     settingsService: SettingsService;
@@ -16,7 +16,7 @@ export function AppRouter({ settingsService }: AppRouterProps) {
                     <Outlet />
                 </AppLayout>
             ),
-            children: navigationList.map((route) => ({
+            children: appNavigations.map((route) => ({
                 path: route.path,
                 element: <route.component />,
             })),

@@ -5,6 +5,9 @@ export interface NavigationModel {
     path: string;
     label: string;
     title: string;
-    icon: SvgIconComponent;
     component: () => JSX.Element;
+}
+
+export interface NavigationMenuModel extends NavigationModel {
+    icon: SvgIconComponent;
 }

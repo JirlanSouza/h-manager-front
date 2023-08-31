@@ -10,7 +10,7 @@ import { CSSObject, Theme, styled, useTheme } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavigationModel } from "../../navigation/NavigationModel";
-import { navigationList } from "../../navigation/navigationList";
+import { navigationsMenu } from "../../navigation/navigations";
 
 interface DrawerProps extends MuiDrawerProps {
     width: number;
@@ -85,7 +85,7 @@ export function DrawerComponent({ open }: DrawerComponentProps) {
                     margin: theme.spacing(1),
                 }}
             >
-                {navigationList.map((navigationItem) => (
+                {navigationsMenu.map((navigationItem) => (
                     <ListItem
                         key={navigationItem.path}
                         disablePadding

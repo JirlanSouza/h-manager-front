@@ -8,10 +8,12 @@ import {
     useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { AddCustomersViewModel } from "../../viewModels/AddcustomerViewModel";
 
 export function AddCustomerScreen() {
     const theme = useTheme();
     const navigate = useNavigate();
+    const { customerFields, submit } = AddCustomersViewModel();
 
     function handleCancel() {
         navigate(-1);
@@ -51,6 +53,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.name}
                             />
                         </Grid>
 
@@ -61,6 +64,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.cpf}
                             />
                         </Grid>
                         <Grid item xs={12} sm={8}>
@@ -70,6 +74,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.email}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
@@ -79,6 +84,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.telephone}
                             />
                         </Grid>
                     </Grid>
@@ -93,6 +99,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.street}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
@@ -102,6 +109,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.houseNumber}
                             />
                         </Grid>
                         <Grid item xs={12} sm={8}>
@@ -111,6 +119,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.neighborhood}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
@@ -120,6 +129,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.zipCode}
                             />
                         </Grid>
                         <Grid item xs={12} sm={8}>
@@ -129,6 +139,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.city}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
@@ -138,6 +149,18 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
+                                {...customerFields.state}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                variant="outlined"
+                                label="Paíz"
+                                size="small"
+                                margin="dense"
+                                fullWidth
+                                {...customerFields.country}
                             />
                         </Grid>
                     </Grid>
@@ -157,6 +180,7 @@ export function AddCustomerScreen() {
                         size="small"
                         startIcon={<SaveRounded />}
                         sx={{ minWidth: 100 }}
+                        onClick={submit}
                     >
                         Salvar
                     </Button>

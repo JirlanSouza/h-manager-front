@@ -27,6 +27,7 @@ export function CustomersScreen() {
             .map((_, i) => {
                 return (
                     <Box
+                        key={i}
                         flex={1}
                         sx={{
                             height: theme.spacing(4),

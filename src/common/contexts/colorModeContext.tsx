@@ -7,7 +7,7 @@ import {
     useMemo,
     useState,
 } from "react";
-import { SettingsService } from "../../service/settingsService.ts";
+import { SettingsService } from "../../services/settingsService.ts";
 import { COLOR_MODE, getAppTheme } from "../theme/theme.ts";
 
 const ColorModeContext = createContext({

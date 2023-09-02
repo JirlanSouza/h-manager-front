@@ -3,6 +3,7 @@ import {
     Box,
     Button,
     Grid,
+    Snackbar,
     TextField,
     Typography,
     useTheme,
@@ -13,7 +14,7 @@ import { AddCustomersViewModel } from "../../viewModels/AddcustomerViewModel";
 export function AddCustomerScreen() {
     const theme = useTheme();
     const navigate = useNavigate();
-    const { customerFields, submit } = AddCustomersViewModel();
+    const viewModel = AddCustomersViewModel();
 
     function handleCancel() {
         navigate(-1);
@@ -53,7 +54,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.name}
+                                {...viewModel.customerFields.name}
                             />
                         </Grid>
 
@@ -64,7 +65,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.cpf}
+                                {...viewModel.customerFields.cpf}
                             />
                         </Grid>
                         <Grid item xs={12} sm={8}>
@@ -74,7 +75,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.email}
+                                {...viewModel.customerFields.email}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
@@ -84,7 +85,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.telephone}
+                                {...viewModel.customerFields.telephone}
                             />
                         </Grid>
                     </Grid>
@@ -99,7 +100,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.street}
+                                {...viewModel.customerFields.street}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
@@ -109,7 +110,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.houseNumber}
+                                {...viewModel.customerFields.houseNumber}
                             />
                         </Grid>
                         <Grid item xs={12} sm={8}>
@@ -119,7 +120,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.neighborhood}
+                                {...viewModel.customerFields.neighborhood}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
@@ -129,7 +130,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.zipCode}
+                                {...viewModel.customerFields.zipCode}
                             />
                         </Grid>
                         <Grid item xs={12} sm={8}>
@@ -139,7 +140,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.city}
+                                {...viewModel.customerFields.city}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
@@ -149,7 +150,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.state}
+                                {...viewModel.customerFields.state}
                             />
                         </Grid>
 
@@ -160,7 +161,7 @@ export function AddCustomerScreen() {
                                 size="small"
                                 margin="dense"
                                 fullWidth
-                                {...customerFields.country}
+                                {...viewModel.customerFields.country}
                             />
                         </Grid>
                     </Grid>
@@ -180,12 +181,26 @@ export function AddCustomerScreen() {
                         size="small"
                         startIcon={<SaveRounded />}
                         sx={{ minWidth: 100 }}
-                        onClick={submit}
+                        onClick={viewModel.submit}
                     >
                         Salvar
                     </Button>
                 </Box>
             </Box>
+            <Snackbar
+                open={viewModel.showSuccessMessagae}
+                message="Cliente adicionado com sucesso!"
+                autoHideDuration={5000}
+                onClose={viewModel.clearResultError}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            />
+            <Snackbar
+                open={viewModel.showErrorMessage}
+                message={viewModel.errorMessage}
+                autoHideDuration={5000}
+                onClose={viewModel.clearResultError}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            />
         </Box>
     );
 }

@@ -1,5 +1,5 @@
-import { Axios, HttpStatusCode } from "axios";
-import { ApiResponse } from "./ApiResponse";
+import { Axios, AxiosError, HttpStatusCode } from "axios";
+import { ApiResponse, ApiResponseErrorDetail } from "./ApiResponse";
 
 export class ApiGatway {
     constructor(private readonly axios: Axios) {}
@@ -20,6 +20,7 @@ export class ApiGatway {
 
     async post<T, R>(path: string, data: T): Promise<ApiResponse<R>> {
         try {
+            console.log(path, JSON.stringify(data));
             const response = await this.axios.post<R>(path, data);
 
             if (
@@ -30,7 +31,14 @@ export class ApiGatway {
             }
 
             return ApiResponse.createSuccess(response.data);
-        } catch (erro) {
+        } catch (err) {
+            const erro = err as AxiosError;
+            const detail = erro.response?.data as ApiResponseErrorDetail;
+
+            if (detail) {
+                return ApiResponse.createError(erro, detail);
+            }
+
             return ApiResponse.createError(erro as Error);
         }
     }

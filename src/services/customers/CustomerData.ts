@@ -3,6 +3,10 @@ export interface CustomerData {
     cpf: string;
     email: string;
     telephone: number;
+    address: CustomerAddressData;
+}
+
+export interface CustomerAddressData {
     street: string;
     houseNumber: string;
     neighborhood: string;

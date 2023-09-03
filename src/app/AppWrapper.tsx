@@ -2,7 +2,7 @@ import React, { JSX } from "react";
 import { ColorModeContextProvider } from "../common/contexts/colorModeContext.tsx";
 import { AppRouter } from "../navigation/routes/AppRouter.tsx";
 import { SettingsService } from "../services/settingsService.ts";
-import { AppSnackbarProvider } from "./AppSnackBarProvider.tsx";
+import { AppSnackbarProvider } from "./AppSnackbarProvider.tsx";
 
 const settingsService = new SettingsService();
 

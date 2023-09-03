@@ -3,7 +3,6 @@ import {
     Box,
     Button,
     Grid,
-    Snackbar,
     TextField,
     Typography,
     useTheme,
@@ -187,20 +186,6 @@ export function AddCustomerScreen() {
                     </Button>
                 </Box>
             </Box>
-            <Snackbar
-                open={viewModel.showSuccessMessagae}
-                message="Cliente adicionado com sucesso!"
-                autoHideDuration={5000}
-                onClose={viewModel.clearResultError}
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            />
-            <Snackbar
-                open={viewModel.showErrorMessage}
-                message={viewModel.errorMessage}
-                autoHideDuration={5000}
-                onClose={viewModel.clearResultError}
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            />
         </Box>
     );
 }

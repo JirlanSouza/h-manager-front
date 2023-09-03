@@ -1,7 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { number, object, setLocale, string } from "yup";
+import { useAppSnackbar } from "../common/hooks/useAppSnackBar";
 import { CustomerServiceFactory } from "../services/customers/CusomerServiceFactory";
 import {
     CustomerAddressData,
@@ -37,6 +39,8 @@ const schema = object<CustomerData>().shape({
 });
 
 export function AddCustomersViewModel() {
+    const { enqueueSuccessSnackBar, enqueueErrorSnackBar } = useAppSnackbar();
+    const navigate = useNavigate();
     const [result, setResult] = useState({
         received: false,
         success: false,
@@ -59,15 +63,15 @@ export function AddCustomersViewModel() {
         const response = await customerService.save(data);
 
         if (response.success) {
-            setResult({ ...result, received: true, success: true });
+            enqueueSuccessSnackBar("Cliente adicionado com sucesso!");
+            navigate(-1);
             return;
         }
 
-        setResult({
-            received: true,
-            success: false,
-            errorMessage: response.error?.message || "",
-        });
+        enqueueErrorSnackBar(
+            response.error?.message ||
+                "Aconteceu um erro ao adicionar o cliente!"
+        );
     }
 
     function clearResultError() {

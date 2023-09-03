@@ -1,6 +1,6 @@
 import axios from "axios";
 import ReactDOM from "react-dom/client";
-import { AppWrapper } from "./app/AppComponent";
+import { AppWrapper } from "./app/AppWrapper";
 import { ApiGatway } from "./common/api/ApiGatway";
 import { CustomerServiceFactory } from "./services/customers/CusomerServiceFactory";
 import { CustomerService } from "./services/customers/CustomerService";

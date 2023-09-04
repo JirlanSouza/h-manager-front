@@ -1,3 +1,4 @@
+import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import {
     JSX,
@@ -48,7 +49,10 @@ export function ColorModeContextProvider({
 
     return (
         <ColorModeContext.Provider value={contextValue}>
-            <ThemeProvider theme={appTheme}>{children}</ThemeProvider>
+            <ThemeProvider theme={appTheme}>
+                <CssBaseline />
+                {children}
+            </ThemeProvider>
         </ColorModeContext.Provider>
     );
 }

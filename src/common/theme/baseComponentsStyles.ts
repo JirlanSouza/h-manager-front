@@ -2,6 +2,51 @@ import { Theme } from "@mui/material/styles";
 
 export function baseComponentStylesCustomizer(theme: Theme) {
     theme.components = {
+        MuiCssBaseline: {
+            styleOverrides: {
+                html: {
+                    colorScheme: theme.palette.mode,
+                },
+
+                "body, #root": {
+                    width: "100vw",
+                    height: "100vh",
+                    margin: 0,
+                    padding: 0,
+                    overflow: "hidden",
+                    "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
+                        backgroundColor: "transparent", //theme.palette.background.default,
+                        width: theme.spacing(1),
+                        borderTopRightRadius: theme.spacing(1),
+                        borderBottomRightRadius: theme.spacing(1),
+                        overflow: "hidden",
+                    },
+                    "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb":
+                        {
+                            borderRadius: theme.spacing(1),
+                            backgroundColor: theme.palette.divider,
+                            minHeight: 24,
+                            //border: `3px solid ${theme.palette.background.default}`,
+                        },
+                    "&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus":
+                        {
+                            backgroundColor: theme.palette.primary.main,
+                        },
+                    "&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active":
+                        {
+                            backgroundColor: theme.palette.primary.main,
+                        },
+                    "&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover":
+                        {
+                            backgroundColor: theme.palette.primary.main,
+                        },
+                    "&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner":
+                        {
+                            backgroundColor: theme.palette.divider,
+                        },
+                },
+            },
+        },
         MuiAppBar: {
             styleOverrides: {
                 root: {

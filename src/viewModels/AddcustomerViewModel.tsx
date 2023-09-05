@@ -1,24 +1,12 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { number, object, setLocale, string } from "yup";
-import { useAppSnackbar } from "../common/hooks/useAppSnackBar";
-import { CustomerServiceFactory } from "../services/customers/CusomerServiceFactory";
+import { useAppForm } from "../common/hooks/FormState";
+import { useAppSnackbar } from "../common/hooks/useAppSnackbar";
+import { number, object, string } from "../config/yupConfig";
 import {
     CustomerAddressData,
     CustomerData,
-} from "../services/customers/CustomerData";
-import { buildSaveCustomerFormFields } from "./SaveCustomerFormData";
-
-setLocale({
-    mixed: {
-        required: "${path} é obrigatório",
-    },
-    string: {
-        min: "${path} deve ter no mínimo ${min} caracteres",
-    },
-});
+} from "../models/customer/CustomerData";
+import { CustomerServiceFactory } from "../services/customers/CusomerServiceFactory";
 
 const schema = object<CustomerData>().shape({
     name: string().label("O nome").required().min(3),
@@ -39,25 +27,11 @@ const schema = object<CustomerData>().shape({
 });
 
 export function AddCustomersViewModel() {
-    const { enqueueSuccessSnackBar, enqueueErrorSnackBar } = useAppSnackbar();
     const navigate = useNavigate();
-    const [result, setResult] = useState({
-        received: false,
-        success: false,
-        errorMessage: "",
-    });
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isLoading },
-    } = useForm<CustomerData>({
-        resolver: yupResolver(schema),
-    });
+    const { enqueueSuccessSnackBar, enqueueErrorSnackBar } = useAppSnackbar();
 
-    const fields = buildSaveCustomerFormFields(register, errors);
+    const form = useAppForm<CustomerData>(schema);
     const customerService = CustomerServiceFactory.getCustomerService();
-    const showSuccessMessagae = result.received && result.success;
-    const showErrorMessage = result.received && !result.success;
 
     async function submit(data: CustomerData) {
         const response = await customerService.save(data);
@@ -74,17 +48,9 @@ export function AddCustomersViewModel() {
         );
     }
 
-    function clearResultError() {
-        setResult({ received: false, success: false, errorMessage: "" });
-    }
-
     return {
-        isLoading,
-        showSuccessMessagae,
-        showErrorMessage,
-        errorMessage: result.errorMessage,
-        customerFields: fields,
-        submit: handleSubmit(submit),
-        clearResultError,
+        isLoading: form.isLoading,
+        getFieldState: form.getFormField,
+        submit: form.handleSubmit(submit),
     };
 }

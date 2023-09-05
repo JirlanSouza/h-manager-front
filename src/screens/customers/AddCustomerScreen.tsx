@@ -5,14 +5,15 @@ import { Form } from "../../common/components/Form";
 import { FormFieldSet } from "../../common/components/FormFieldSet";
 import { FormInput } from "../../common/components/FormInput";
 import { Page } from "../../common/components/Page";
+import { GO_BACK } from "../../navigation/navigations";
 import { AddCustomersViewModel } from "../../viewModels/AddcustomerViewModel";
 
 export function AddCustomerScreen() {
     const navigate = useNavigate();
-    const { customerFields, submit } = AddCustomersViewModel();
+    const { getFieldState, submit } = AddCustomersViewModel();
 
     function handleCancel() {
-        navigate(-1);
+        navigate(GO_BACK);
     }
 
     return (
@@ -44,28 +45,28 @@ export function AddCustomerScreen() {
                         label="Nome"
                         xs={12}
                         sm={8}
-                        fieldState={customerFields.name}
+                        fieldState={getFieldState("name")}
                     />
 
                     <FormInput
                         label="CPF"
                         xs={12}
                         sm={4}
-                        fieldState={customerFields.cpf}
+                        fieldState={getFieldState("cpf")}
                     />
 
                     <FormInput
                         label="email"
                         xs={12}
                         sm={8}
-                        fieldState={customerFields.email}
+                        fieldState={getFieldState("email")}
                     />
 
                     <FormInput
                         label="Tefefone"
                         xs={12}
                         sm={4}
-                        fieldState={customerFields.telephone}
+                        fieldState={getFieldState("telephone")}
                     />
                 </FormFieldSet>
 
@@ -74,49 +75,49 @@ export function AddCustomerScreen() {
                         label="Rua"
                         xs={12}
                         sm={8}
-                        fieldState={customerFields.street}
+                        fieldState={getFieldState("address.street")}
                     />
 
                     <FormInput
                         label="Nº"
                         xs={12}
                         sm={4}
-                        fieldState={customerFields.houseNumber}
+                        fieldState={getFieldState("address.houseNumber")}
                     />
 
                     <FormInput
                         label="Bairro"
                         xs={12}
                         sm={8}
-                        fieldState={customerFields.neighborhood}
+                        fieldState={getFieldState("address.neighborhood")}
                     />
 
                     <FormInput
                         label="Cep"
                         xs={12}
                         sm={4}
-                        fieldState={customerFields.zipCode}
+                        fieldState={getFieldState("address.zipCode")}
                     />
 
                     <FormInput
                         label="Cidade"
                         xs={12}
                         sm={8}
-                        fieldState={customerFields.city}
+                        fieldState={getFieldState("address.city")}
                     />
 
                     <FormInput
                         label="Estado"
                         xs={12}
                         sm={4}
-                        fieldState={customerFields.state}
+                        fieldState={getFieldState("address.state")}
                     />
 
                     <FormInput
                         label="Paíz"
                         xs={12}
                         sm={4}
-                        fieldState={customerFields.country}
+                        fieldState={getFieldState("address.country")}
                     />
                 </FormFieldSet>
             </Form>

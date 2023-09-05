@@ -1,5 +1,5 @@
 import { Breakpoint, Grid, TextField } from "@mui/material";
-import { FormFieldState } from "../adapters/FormState";
+import { FormFieldState } from "../hooks/FormState";
 
 type FormInputBreakpoints = Partial<Record<Breakpoint, number>>;
 

@@ -1,5 +1,5 @@
 import { ApiGatway } from "../../common/api/ApiGatway";
-import { CustomerData } from "./CustomerData";
+import { CustomerData } from "../../models/customer/CustomerData";
 
 export class CustomerService {
     constructor(private readonly apiGateway: ApiGatway) {}

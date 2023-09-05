@@ -4,6 +4,8 @@ import { CustomersScreen } from "../screens/customers/CustomersScreen";
 import { HomeScreen } from "../screens/home/HomeScreen";
 import { NavigationMenuModel, NavigationModel } from "./NavigationModel";
 
+export const GO_BACK = -1;
+
 export enum NavigationPath {
     HOME = "/",
     CUSTOMERS = "/customers",

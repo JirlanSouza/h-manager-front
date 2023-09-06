@@ -15,7 +15,7 @@ export function baseComponentStylesCustomizer(theme: Theme) {
                     padding: 0,
                     overflow: "hidden",
                     "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
-                        backgroundColor: "transparent", //theme.palette.background.default,
+                        backgroundColor: "transparent",
                         width: theme.spacing(1),
                         borderTopRightRadius: theme.spacing(1),
                         borderBottomRightRadius: theme.spacing(1),
@@ -26,7 +26,6 @@ export function baseComponentStylesCustomizer(theme: Theme) {
                             borderRadius: theme.spacing(1),
                             backgroundColor: theme.palette.divider,
                             minHeight: 24,
-                            //border: `3px solid ${theme.palette.background.default}`,
                         },
                     "&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus":
                         {
@@ -51,9 +50,9 @@ export function baseComponentStylesCustomizer(theme: Theme) {
             styleOverrides: {
                 root: {
                     background: theme.palette.background.paper,
-                    color: theme.palette.getContrastText(
-                        theme.palette.background.paper
-                    ),
+                    "& .MuiToolbar-root": {
+                        paddingRight: theme.spacing(1.5),
+                    },
                 },
             },
         },
@@ -68,8 +67,6 @@ export function baseComponentStylesCustomizer(theme: Theme) {
             styleOverrides: {
                 root: {
                     borderRadius: theme.shape.borderRadius,
-                    border: `1px solid ${theme.palette.divider}`,
-                    background: theme.palette.action.hover,
                     color: theme.palette.primary.main,
                     "&:hover": {
                         background: theme.palette.action.selected,

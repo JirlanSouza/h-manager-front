@@ -13,9 +13,9 @@ import { baseComponentStylesCustomizer } from "./baseComponentsStyles";
 const palette = {
     light: {
         primary: {
-            main: blue[200],
-            light: blue[50],
-            dark: blue[400],
+            main: blue[400],
+            light: blue[200],
+            dark: blue[500],
         },
         secondary: {
             main: purple[200],
@@ -49,12 +49,12 @@ const palette = {
         },
         divider: "rgba(0, 52, 149, 0.12)",
         background: {
-            paper: common.white,
-            default: common.white,
+            paper: "#FAFAFA",
+            default: "#FAFAFA",
         },
         action: {
             active: "rgba(144, 202, 249, 0.54)",
-            hover: "rgba(144, 202, 249, 0.08)",
+            hover: "rgba(144, 202, 249, 0.11)",
             hoverOpacity: 0.08,
             selected: "rgba(144, 202, 249, 0.16)",
             selectedOpacity: 0.16,
@@ -98,7 +98,7 @@ const palette = {
             dark: orange[900],
         },
         text: {
-            primary: common.white,
+            primary: "rgba(255, 255, 255, 0.8)",
             secondary: "rgba(255, 255, 255, 0.7)",
             disabled: "rgba(255, 255, 255, 0.5)",
             icon: "rgba(255, 255, 255, 0.5)",

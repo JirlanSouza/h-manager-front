@@ -19,6 +19,7 @@ export function AddCustomerScreen() {
     return (
         <Page title="Adicionar novo cliente">
             <Form
+                sx={{ mt: 2 }}
                 submitButton={
                     <Button
                         type="submit"

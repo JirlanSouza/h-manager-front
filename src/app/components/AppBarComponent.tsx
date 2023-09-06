@@ -3,12 +3,14 @@ import {
     DarkModeOutlined,
     LightModeOutlined,
     MenuRounded,
+    SearchRounded,
 } from "@mui/icons-material";
-import { IconButton, Typography } from "@mui/material";
+import { InputAdornment, TextField, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { styled, useTheme } from "@mui/material/styles";
+import { IconButton } from "../../common/components/IconButton.tsx";
 import { useColorMode } from "../../common/contexts/colorModeContext.tsx";
 
 interface AppBarComponentProps {
@@ -52,6 +54,16 @@ export function AppBarComponent({
                         H manager
                     </Typography>
                 </Box>
+                <TextField
+                    size="small"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <SearchRounded />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
                 <Box>
                     <IconButton onClick={toggleColorMode}>
                         {isLightMode ? (

@@ -17,8 +17,6 @@ export function MainContentComponent({ children }: MainContentComponentProps) {
             marginTop={`calc(${
                 theme.mixins.toolbar.minHeight
             }px + ${theme.spacing(1)})`}
-            pr={1}
-            pb={1}
             overflow="hidden"
         >
             {children}

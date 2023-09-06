@@ -1,4 +1,5 @@
-import { Box } from "@mui/material";
+import { Theme } from "@emotion/react";
+import { Box, Paper, SxProps } from "@mui/material";
 import { FormEvent, ReactNode } from "react";
 
 interface FormProps {
@@ -6,6 +7,7 @@ interface FormProps {
     submitButton: ReactNode;
     cancelButton?: ReactNode;
     onSubmit?: (event: FormEvent) => void;
+    sx?: SxProps<Theme>;
 }
 
 export function Form({
@@ -13,21 +15,28 @@ export function Form({
     submitButton,
     cancelButton: cancellButton,
     onSubmit,
+    sx,
 }: FormProps) {
     return (
-        <Box
+        <Paper
             component="form"
-            flexDirection="column"
-            maxWidth={900}
-            mb={3}
+            elevation={0}
+            sx={{
+                display: "flex",
+                flex: 1,
+                flexDirection: "column",
+                maxWidth: 900,
+                p: 2,
+                ...sx,
+            }}
             onSubmit={onSubmit}
         >
             {children}
 
-            <Box display="flex" gap={3} justifyContent="end" mt={2}>
+            <Box display="flex" gap={3} mt="auto" ml="auto">
                 {cancellButton}
                 {submitButton}
             </Box>
-        </Box>
+        </Paper>
     );
 }

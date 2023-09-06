@@ -16,8 +16,7 @@ export function Page({ title, children }: Pageprops) {
                 flexDirection: "column",
                 flex: 1,
                 background: theme.palette.action.hover,
-                borderRadius: theme.shape.borderRadius + "px",
-                m: 1,
+                borderTopLeftRadius: theme.shape.borderRadius + "px",
                 p: 2,
                 pt: 1,
             }}

@@ -13,8 +13,8 @@ export function Page({ title, children }: Pageprops) {
                 display: "flex",
                 flexDirection: "column",
                 flex: 1,
-                p: 2,
-                pt: 1,
+                px: 2,
+                py: 1,
             }}
         >
             {title && (

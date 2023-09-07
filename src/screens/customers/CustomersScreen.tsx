@@ -80,13 +80,7 @@ export function CustomersScreen() {
                     }}
                 >
                     <TableContainer sx={{ flex: 1 }}>
-                        <Table
-                            stickyHeader
-                            sx={{
-                                minWidth: 650,
-                            }}
-                            size="small"
-                        >
+                        <Table stickyHeader size="small">
                             <TableHead>
                                 <TableRow
                                     sx={{
@@ -143,9 +137,9 @@ export function CustomersScreen() {
                     <TablePagination
                         rowsPerPageOptions={[10, 20, 25]}
                         component="div"
-                        count={totalItems + 200}
+                        count={totalItems}
                         rowsPerPage={itemsperPage}
-                        page={page}
+                        page={page - 1}
                         showFirstButton
                         showLastButton
                         labelRowsPerPage="Items por página"

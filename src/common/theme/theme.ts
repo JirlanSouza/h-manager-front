@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material";
 import {
     blue,
-    common,
     green,
     lightBlue,
     orange,
@@ -23,8 +22,8 @@ const palette = {
             dark: purple[400],
         },
         error: {
-            main: red[500],
-            light: red[300],
+            main: red[600],
+            light: red[500],
             dark: red[700],
         },
         info: {
@@ -33,13 +32,13 @@ const palette = {
             dark: lightBlue[700],
         },
         success: {
-            main: green[400],
-            light: green[300],
+            main: green[500],
+            light: green[400],
             dark: green[700],
         },
         warning: {
-            main: orange[400],
-            light: orange[300],
+            main: orange[500],
+            light: orange[400],
             dark: orange[700],
         },
         text: {
@@ -49,8 +48,8 @@ const palette = {
         },
         divider: "rgba(0, 52, 149, 0.12)",
         background: {
-            paper: "#FAFAFA",
-            default: "#FAFAFA",
+            paper: "#f6f6f9",
+            default: "#edeffd",
         },
         action: {
             active: "rgba(144, 202, 249, 0.54)",
@@ -79,7 +78,7 @@ const palette = {
         },
         error: {
             main: red[700],
-            light: red[400],
+            light: red[500],
             dark: red[800],
         },
         info: {
@@ -89,7 +88,7 @@ const palette = {
         },
         success: {
             main: green[800],
-            light: green[500],
+            light: green[600],
             dark: green[900],
         },
         warning: {
@@ -103,13 +102,13 @@ const palette = {
             disabled: "rgba(255, 255, 255, 0.5)",
             icon: "rgba(255, 255, 255, 0.5)",
         },
-        divider: "rgb(31, 38, 48)",
+        divider: "rgba(31, 38, 58, 0.8)",
         background: {
-            paper: "#121212",
-            default: "#121212",
+            paper: "#1c1e22",
+            default: "#181a1e",
         },
         action: {
-            active: common.white, //rgba(25, 118, 210, 0.16)
+            active: "rgba(25, 118, 210, 0.16)",
             hover: "rgba(25, 118, 210, 0.08)",
             hoverOpacity: 0.08,
             selected: "rgba(25, 118, 210, 0.16)",

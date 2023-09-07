@@ -49,8 +49,9 @@ export function baseComponentStylesCustomizer(theme: Theme) {
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    background: theme.palette.background.paper,
+                    background: theme.palette.background.default,
                     "& .MuiToolbar-root": {
+                        paddingLeft: theme.spacing(4),
                         paddingRight: theme.spacing(1.5),
                     },
                 },
@@ -126,6 +127,22 @@ export function baseComponentStylesCustomizer(theme: Theme) {
                     "& .MuiOutlinedInput-notchedOutline": {
                         borderColor: theme.palette.divider,
                     },
+                },
+            },
+        },
+        MuiTableHead: {
+            styleOverrides: {
+                root: {
+                    "& th": {
+                        background: theme.palette.background.paper,
+                    },
+                },
+            },
+        },
+        MuiTablePagination: {
+            styleOverrides: {
+                root: {
+                    marginRight: theme.spacing(1),
                 },
             },
         },

@@ -45,7 +45,7 @@ export function AppBarComponent({
                         onClick={onMenuButtonClick}
                         edge="start"
                         sx={{
-                            marginRight: theme.spacing(3),
+                            marginRight: theme.spacing(5),
                         }}
                     >
                         {open ? <ChevronLeftRounded /> : <MenuRounded />}

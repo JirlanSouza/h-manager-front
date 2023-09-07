@@ -16,8 +16,22 @@ interface DrawerProps extends MuiDrawerProps {
     width: number;
 }
 
+const baseMixin = (theme: Theme): CSSObject => ({
+    height: `calc(100% - ${
+        parseInt(theme.mixins.toolbar.minHeight as string) +
+        parseInt(theme.spacing(2))
+    }px)`,
+    border: 0,
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    top: theme.mixins.toolbar.minHeight,
+    borderRadius: `${theme.shape.borderRadius}px`,
+    background: theme.palette.background.paper,
+});
+
 const openedMixin = (theme: Theme, drawerWidth: number): CSSObject => ({
     width: drawerWidth,
+    margin: theme.spacing(1),
     transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -26,35 +40,32 @@ const openedMixin = (theme: Theme, drawerWidth: number): CSSObject => ({
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
+    margin: theme.spacing(1),
     transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: `calc(${theme.spacing(7)} + 1px)`,
-    [theme.breakpoints.up("sm")]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
-    },
+    width: `calc(${theme.spacing(8)} + 1px)`,
 });
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-    ...theme.mixins.toolbar,
-}));
 
 const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
 })<DrawerProps>(({ theme, open, width }) => ({
-    width,
     flexShrink: 0,
     whiteSpace: "nowrap",
     boxSizing: "border-box",
+
     ...(open && {
         ...openedMixin(theme, width),
-        "& .MuiDrawer-paper": openedMixin(theme, width),
+        "& .MuiDrawer-paper": {
+            ...baseMixin(theme),
+            ...openedMixin(theme, width),
+        },
     }),
     ...(!open && {
         ...closedMixin(theme),
-        "& .MuiDrawer-paper": closedMixin(theme),
+        "& .MuiDrawer-paper": { ...baseMixin(theme), ...closedMixin(theme) },
     }),
 }));
 
@@ -73,18 +84,8 @@ export function DrawerComponent({ open }: DrawerComponentProps) {
     }
 
     return (
-        <Drawer
-            variant={"permanent"}
-            open={open}
-            width={240}
-            PaperProps={{ sx: { border: "none" } }}
-        >
-            <DrawerHeader />
-            <List
-                sx={{
-                    margin: theme.spacing(1),
-                }}
-            >
+        <Drawer variant={"permanent"} open={open} width={240}>
+            <List>
                 {navigationsMenu.map((navigationItem) => (
                     <ListItem
                         key={navigationItem.path}

@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { ReactNode } from "react";
 
 interface Pageprops {
@@ -7,16 +7,12 @@ interface Pageprops {
 }
 
 export function Page({ title, children }: Pageprops) {
-    const theme = useTheme();
-
     return (
         <Box
             sx={{
                 display: "flex",
                 flexDirection: "column",
                 flex: 1,
-                background: theme.palette.action.hover,
-                borderTopLeftRadius: theme.shape.borderRadius + "px",
                 p: 2,
                 pt: 1,
             }}

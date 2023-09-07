@@ -1,4 +1,4 @@
-import { CssBaseline, useTheme } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import Box from "@mui/material/Box";
 import { JSX, ReactNode, useState } from "react";
 import { SettingsService } from "../services/settingsService.ts";
@@ -15,7 +15,6 @@ export function AppLayout({
     children,
     settingService,
 }: LayoutProps): JSX.Element {
-    const theme = useTheme();
     const [open, setOpen] = useState(settingService.getDrawerOpen());
 
     function handleDrawerOpen() {
@@ -31,7 +30,6 @@ export function AppLayout({
                 width: "100%",
                 height: "100%",
                 display: "flex",
-                background: theme.palette.background.paper,
             }}
         >
             <CssBaseline />

@@ -1,11 +1,23 @@
 import { Axios, AxiosError, HttpStatusCode } from "axios";
+import { Pageable } from "../../models/Pagination";
 import { ApiResponse, ApiResponseErrorDetail } from "./ApiResponse";
 
 export class ApiGatway {
     constructor(private readonly axios: Axios) {}
 
-    async get<T>(path: string): Promise<ApiResponse<T>> {
+    async get<T>(path: string, pageable?: Pageable): Promise<ApiResponse<T>> {
         try {
+            if (pageable) {
+                const params = new URLSearchParams();
+
+                for (const key in pageable) {
+                    const p = pageable as unknown as Record<string, number>;
+                    params.append(key, p[key].toString());
+                }
+
+                path += "?" + params.toString();
+            }
+
             const response = await this.axios.get<T>(path);
 
             if (response.status !== HttpStatusCode.Ok) {

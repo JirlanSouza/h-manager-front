@@ -26,12 +26,11 @@ export function CustomersScreen() {
     const theme = useTheme();
     const navigate = useNavigate();
     const {
-        customers,
-        page,
-        itemsPerPage: itemsperPage,
-        totalItems,
+        customersPage,
         selectedCustomer,
         onSelectCustomer,
+        onPageChange,
+        onPageSizeChange,
     } = useCustomerSummaryViewModel();
 
     function handleNavigation(path: NavigationPath) {
@@ -100,7 +99,7 @@ export function CustomersScreen() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {customers.map((custumer, i) => (
+                                {customersPage.content.map((custumer, i) => (
                                     <TableRow
                                         key={custumer.id}
                                         hover
@@ -125,7 +124,7 @@ export function CustomersScreen() {
                                             {custumer.cpf}
                                         </TableCell>
                                         <TableCell align="right">
-                                            {custumer.customerSince.toLocaleDateString(
+                                            {custumer.customerSince?.toLocaleDateString(
                                                 "pt-br"
                                             )}
                                         </TableCell>
@@ -137,17 +136,19 @@ export function CustomersScreen() {
                     <TablePagination
                         rowsPerPageOptions={[10, 20, 25]}
                         component="div"
-                        count={totalItems}
-                        rowsPerPage={itemsperPage}
-                        page={page - 1}
+                        count={customersPage.totalItems}
+                        rowsPerPage={customersPage.size}
+                        page={customersPage.number}
                         showFirstButton
                         showLastButton
                         labelRowsPerPage="Items por página"
                         labelDisplayedRows={({ from, to, count }) =>
                             `${from} - ${to} de ${count}`
                         }
-                        onPageChange={() => {}}
-                        onRowsPerPageChange={() => {}}
+                        onPageChange={(_, page) => onPageChange(page)}
+                        onRowsPerPageChange={(e) =>
+                            onPageSizeChange(parseInt(e.target.value))
+                        }
                     />
                 </Paper>
             </Box>

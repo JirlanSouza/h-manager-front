@@ -5,14 +5,14 @@ import {
     MenuRounded,
     SearchRounded,
 } from "@mui/icons-material";
-import { InputAdornment, TextField, Typography } from "@mui/material";
+import { InputAdornment, TextField } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { styled, useTheme } from "@mui/material/styles";
+import hManagerLogo from "../../assets/h-manager-logo.svg";
 import { IconButton } from "../../common/components/IconButton.tsx";
 import { useColorMode } from "../../common/contexts/colorModeContext.tsx";
-
 interface AppBarComponentProps {
     open: boolean;
     onMenuButtonClick: () => void;
@@ -26,6 +26,10 @@ const AppBar = styled(MuiAppBar, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
+}));
+
+const Logo = styled("img")(({ theme }) => ({
+    height: `calc(${theme.mixins.toolbar.minHeight}px - ${theme.spacing(2)})`,
 }));
 
 export function AppBarComponent({
@@ -45,14 +49,12 @@ export function AppBarComponent({
                         onClick={onMenuButtonClick}
                         edge="start"
                         sx={{
-                            marginRight: theme.spacing(5),
+                            marginRight: theme.spacing(2),
                         }}
                     >
                         {open ? <ChevronLeftRounded /> : <MenuRounded />}
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        H manager
-                    </Typography>
+                    <Logo src={hManagerLogo} alt="H manager - logo" />
                 </Box>
                 <TextField
                     size="small"

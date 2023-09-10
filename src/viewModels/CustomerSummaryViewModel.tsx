@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useAppSnackbar } from "../common/hooks/useAppSnackbar";
 import { Page, Pageable } from "../models/Pagination";
 import { CustomerSummary } from "../models/customer/CustomerSummary";
 import { CustomerServiceFactory } from "../services/customers/CusomerServiceFactory";
 
 export function useCustomerSummaryViewModel() {
+    const { enqueueErrorSnackBar } = useAppSnackbar();
     const [selectedCustomer, setSelectedCustomer] = useState(-1);
     const [pageable, setPageable] = useState<Pageable>({ page: 0, size: 20 });
     const [customersPage, setCustomersPage] = useState<Page<CustomerSummary>>({
@@ -30,9 +32,15 @@ export function useCustomerSummaryViewModel() {
                 }));
                 setCustomersPage(result.data);
                 console.log(result.data);
+                return;
             }
+
+            enqueueErrorSnackBar(
+                result.error?.message ||
+                    "Aconteceu um erro ao buscar a lista de clientes!"
+            );
         })();
-    }, [pageable]);
+    }, [pageable, enqueueErrorSnackBar]);
 
     function handlePageChange(pageNumber: number) {
         setPageable({ ...pageable, page: pageNumber });

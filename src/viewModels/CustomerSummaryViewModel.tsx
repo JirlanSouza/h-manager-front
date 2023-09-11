@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppSnackbar } from "../common/hooks/useAppSnackbar";
+import { useQuery } from "../common/hooks/useQuery";
 import { Page, Pageable } from "../models/Pagination";
 import { CustomerSummary } from "../models/customer/CustomerSummary";
 import { CustomerServiceFactory } from "../services/customers/CusomerServiceFactory";
@@ -8,39 +9,26 @@ export function useCustomerSummaryViewModel() {
     const { enqueueErrorSnackBar } = useAppSnackbar();
     const [selectedCustomer, setSelectedCustomer] = useState(-1);
     const [pageable, setPageable] = useState<Pageable>({ page: 0, size: 20 });
-    const [customersPage, setCustomersPage] = useState<Page<CustomerSummary>>({
-        number: 0,
-        size: 0,
-        totalItems: 0,
-        isFirst: true,
-        isLast: true,
-        isEmpty: true,
-        content: [],
-    });
+    const customerService = CustomerServiceFactory.getCustomerService();
 
-    useEffect(() => {
-        (async () => {
-            const result =
-                await CustomerServiceFactory.getCustomerService().getSummary(
-                    pageable
-                );
+    const { isLoading, isError, data } = useQuery<Page<CustomerSummary>>(
+        ["customersSummary", pageable],
+        async () => await customerService.getSummary(pageable)
+    );
 
-            if (result.success && result.data) {
-                result.data.content = result.data.content.map((c) => ({
-                    ...c,
-                    customerSince: new Date(c.customerSince || undefined),
-                }));
-                setCustomersPage(result.data);
-                console.log(result.data);
-                return;
-            }
+    if (data?.success && data.data) {
+        data.data.content = data.data.content.map((c) => ({
+            ...c,
+            customerSince: new Date(c.customerSince || ""),
+        }));
+    }
 
-            enqueueErrorSnackBar(
-                result.error?.message ||
-                    "Aconteceu um erro ao buscar a lista de clientes!"
-            );
-        })();
-    }, [pageable, enqueueErrorSnackBar]);
+    if (!isLoading && isError) {
+        enqueueErrorSnackBar(
+            data?.error?.message ||
+                "Aconteceu um erro ao buscar a lista de clientes!"
+        );
+    }
 
     function handlePageChange(pageNumber: number) {
         setPageable({ ...pageable, page: pageNumber });
@@ -51,7 +39,7 @@ export function useCustomerSummaryViewModel() {
     }
 
     return {
-        customersPage,
+        customersPage: data?.data,
         selectedCustomer,
         onSelectCustomer: setSelectedCustomer,
         onPageChange: handlePageChange,

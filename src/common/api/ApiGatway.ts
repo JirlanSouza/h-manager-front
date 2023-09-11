@@ -5,20 +5,13 @@ import { ApiResponse, ApiResponseErrorDetail } from "./ApiResponse";
 export class ApiGatway {
     constructor(private readonly axios: Axios) {}
 
-    async get<T>(path: string, pageable?: Pageable): Promise<ApiResponse<T>> {
+    async get<T>(
+        path: string,
+        pageable?: Pageable<T>
+    ): Promise<ApiResponse<T>> {
         try {
-            if (pageable) {
-                const params = new URLSearchParams();
-
-                for (const key in pageable) {
-                    const p = pageable as unknown as Record<string, number>;
-                    params.append(key, p[key].toString());
-                }
-
-                path += "?" + params.toString();
-            }
-
-            const response = await this.axios.get<T>(path);
+            const pathWithParams = this.pageableToParams(path, pageable);
+            const response = await this.axios.get<T>(pathWithParams);
 
             if (response.status !== HttpStatusCode.Ok) {
                 return ApiResponse.createError<T>();
@@ -53,5 +46,21 @@ export class ApiGatway {
 
             return ApiResponse.createError(erro as Error);
         }
+    }
+
+    private pageableToParams<T>(path: string, pageable?: Pageable<T>) {
+        if (pageable) {
+            const params = new URLSearchParams();
+            params.append("page", pageable.page.toString());
+            params.append("size", pageable.size.toString());
+
+            if (pageable.sort) {
+                params.append("sort", pageable.sort.toParam());
+            }
+
+            return `${path}?${params.toString()}`;
+        }
+
+        return path;
     }
 }

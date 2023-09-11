@@ -13,6 +13,7 @@ export function useAppSnackbar() {
         enqueueSnackbar(message, {
             variant: "error",
             autoHideDuration: AUTO_RIDE_DURATION_ERROR_SNACKBAR,
+            preventDuplicate: true,
         });
     }
 

@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { useAppSnackbar } from "../common/hooks/useAppSnackbar";
 import { useQuery } from "../common/hooks/useQuery";
-import { Page, Pageable } from "../models/Pagination";
+import { Page, Pageable, SortBy } from "../models/Pagination";
 import { CustomerSummary } from "../models/customer/CustomerSummary";
+import { PageableImpl } from "../models/pagination/Pageable";
+import { SortImpl } from "../models/pagination/Sort";
 import { CustomerServiceFactory } from "../services/customers/CusomerServiceFactory";
 
 export function useCustomerSummaryViewModel() {
     const { enqueueErrorSnackBar } = useAppSnackbar();
     const [selectedCustomer, setSelectedCustomer] = useState(-1);
-    const [pageable, setPageable] = useState<Pageable>({ page: 0, size: 20 });
+    const [pageable, setPageable] = useState<Pageable<CustomerSummary>>(
+        PageableImpl.default(new SortImpl<CustomerSummary>("name"))
+    );
     const customerService = CustomerServiceFactory.getCustomerService();
 
     const { isLoading, isError, data } = useQuery<Page<CustomerSummary>>(
@@ -38,11 +42,18 @@ export function useCustomerSummaryViewModel() {
         setPageable({ ...pageable, size: pageSize });
     }
 
+    function handleSortChange(by: SortBy<CustomerSummary>) {
+        const direction = pageable?.sort?.direction === "asc" ? "desc" : "asc";
+        setPageable(PageableImpl.default(new SortImpl(by, direction)));
+    }
+
     return {
-        customersPage: data?.data,
+        pageable,
         selectedCustomer,
+        customersPage: data?.data,
         onSelectCustomer: setSelectedCustomer,
         onPageChange: handlePageChange,
         onPageSizeChange: handlePageSizeChange,
+        onSortChange: handleSortChange,
     };
 }

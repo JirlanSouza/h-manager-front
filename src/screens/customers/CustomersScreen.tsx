@@ -10,6 +10,7 @@ import { Button } from "../../common/components/Button";
 import { Page } from "../../common/components/Page";
 import { Table } from "../../common/components/Table";
 import { TableContentRow } from "../../common/components/TableContentRow";
+import { TableHeaderCell } from "../../common/components/TableHeaderCell";
 import { TablePagination } from "../../common/components/TablePagination";
 import { formatDate } from "../../common/formatters/formatDate";
 import { NavigationPath } from "../../navigation/navigations";
@@ -19,11 +20,13 @@ export function CustomersScreen() {
     const theme = useTheme();
     const navigate = useNavigate();
     const {
-        customersPage,
+        pageable,
         selectedCustomer,
+        customersPage,
         onSelectCustomer,
         onPageChange,
         onPageSizeChange,
+        onSortChange,
     } = useCustomerSummaryViewModel();
 
     function handleNavigation(path: NavigationPath) {
@@ -63,10 +66,27 @@ export function CustomersScreen() {
                 <Table
                     columns={
                         <>
-                            <TableCell>Nome</TableCell>
+                            <TableHeaderCell
+                                sortProperties={{
+                                    sortBy: "name",
+                                    sort: pageable.sort,
+                                    onSortChange,
+                                }}
+                            >
+                                Nome
+                            </TableHeaderCell>
                             <TableCell align="center">E-mail</TableCell>
                             <TableCell align="center">CPF</TableCell>
-                            <TableCell align="right">Cliente desde</TableCell>
+                            <TableHeaderCell
+                                align="right"
+                                sortProperties={{
+                                    sortBy: "customerSince",
+                                    sort: pageable.sort,
+                                    onSortChange,
+                                }}
+                            >
+                                Cliente desde
+                            </TableHeaderCell>
                         </>
                     }
                     content={customersPage?.content.map((custumer, i) => (

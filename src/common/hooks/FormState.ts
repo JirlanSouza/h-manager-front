@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
+    DefaultValues,
     FieldError,
     FieldErrors,
     FieldPath,
@@ -34,12 +35,16 @@ function parseFormFieldError<T extends FieldValues>(
     return error as FieldError;
 }
 
-export function useAppForm<T extends FieldValues>(schema: ObjectSchema<T>) {
+export function useAppForm<T extends FieldValues>(
+    schema: ObjectSchema<T>,
+    defaultValues?: DefaultValues<T>
+) {
     const {
         register,
         handleSubmit,
         formState: { errors, isLoading },
     } = useForm<T>({
+        defaultValues,
         resolver: yupResolver(schema) as unknown as Resolver<T>,
     });
 

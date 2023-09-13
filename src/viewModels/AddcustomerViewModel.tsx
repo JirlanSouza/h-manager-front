@@ -6,7 +6,7 @@ import {
     CustomerAddressData,
     CustomerData,
 } from "../models/customer/CustomerData";
-import { CustomerServiceFactory } from "../services/customers/CusomerServiceFactory";
+import { ServicesFactory } from "../services/ServicesFactory";
 
 const schema = object<CustomerData>().shape({
     name: string().label("O nome").required().min(3),
@@ -31,7 +31,7 @@ export function AddCustomersViewModel() {
     const { enqueueSuccessSnackBar, enqueueErrorSnackBar } = useAppSnackbar();
 
     const form = useAppForm<CustomerData>(schema);
-    const customerService = CustomerServiceFactory.getCustomerService();
+    const customerService = ServicesFactory.getCustomerService();
 
     async function submit(data: CustomerData) {
         const response = await customerService.save(data);

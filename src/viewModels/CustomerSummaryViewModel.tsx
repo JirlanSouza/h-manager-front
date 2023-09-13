@@ -5,7 +5,7 @@ import { Page, Pageable, SortBy } from "../models/Pagination";
 import { CustomerSummary } from "../models/customer/CustomerSummary";
 import { PageableImpl } from "../models/pagination/Pageable";
 import { SortImpl } from "../models/pagination/Sort";
-import { CustomerServiceFactory } from "../services/customers/CusomerServiceFactory";
+import { ServicesFactory } from "../services/ServicesFactory";
 
 export function useCustomerSummaryViewModel() {
     const { enqueueErrorSnackBar } = useAppSnackbar();
@@ -13,7 +13,7 @@ export function useCustomerSummaryViewModel() {
     const [pageable, setPageable] = useState<Pageable<CustomerSummary>>(
         PageableImpl.default(new SortImpl<CustomerSummary>("name"))
     );
-    const customerService = CustomerServiceFactory.getCustomerService();
+    const customerService = ServicesFactory.getCustomerService();
 
     const { isLoading, isError, data } = useQuery<Page<CustomerSummary>>(
         ["customersSummary", pageable],

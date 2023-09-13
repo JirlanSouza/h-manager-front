@@ -5,16 +5,16 @@ import { ApiResponse, ApiResponseErrorDetail } from "./ApiResponse";
 export class ApiGatway {
     constructor(private readonly axios: Axios) {}
 
-    async get<T>(
+    async get<T, K>(
         path: string,
         pageable?: Pageable<T>
-    ): Promise<ApiResponse<T>> {
+    ): Promise<ApiResponse<K>> {
         try {
             const pathWithParams = this.pageableToParams(path, pageable);
-            const response = await this.axios.get<T>(pathWithParams);
+            const response = await this.axios.get<K>(pathWithParams);
 
             if (response.status !== HttpStatusCode.Ok) {
-                return ApiResponse.createError<T>();
+                return ApiResponse.createError<K>();
             }
 
             return ApiResponse.createSuccess(response.data);
@@ -23,9 +23,8 @@ export class ApiGatway {
         }
     }
 
-    async post<T, R>(path: string, data: T): Promise<ApiResponse<R>> {
+    async post<R, T>(path: string, data: T): Promise<ApiResponse<R>> {
         try {
-            console.log(path, JSON.stringify(data));
             const response = await this.axios.post<R>(path, data);
 
             if (

@@ -7,16 +7,16 @@ export class CustomerService {
     constructor(private readonly apiGateway: ApiGatway) {}
 
     async save(customerData: CustomerData) {
-        return await this.apiGateway.post<CustomerData, string>(
+        return await this.apiGateway.post<string, CustomerData>(
             "/customers",
             customerData
         );
     }
 
-    async getSummary(pageable: Pageable) {
-        return await this.apiGateway.get<Page<CustomerSummary>>(
-            "/customers",
-            pageable
-        );
+    async getSummary(pageable: Pageable<CustomerSummary>) {
+        return await this.apiGateway.get<
+            CustomerSummary,
+            Page<CustomerSummary>
+        >("/customers", pageable);
     }
 }

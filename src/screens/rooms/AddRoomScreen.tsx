@@ -4,7 +4,8 @@ import { Button } from "../../common/components/Button";
 import { Form } from "../../common/components/Form";
 import { FormCheckbox } from "../../common/components/FormCheckbox";
 import { FormFieldSet } from "../../common/components/FormFieldSet";
-import { FormInput } from "../../common/components/FormInput";
+import { FormInputMasked } from "../../common/components/FormInputMask";
+import { FormInputNumber } from "../../common/components/FormInputNumber";
 import { Page } from "../../common/components/Page";
 import { GO_BACK } from "../../navigation/navigations";
 import { useAddRoomViewModel } from "../../viewModels/AddRoomViewModel";
@@ -43,29 +44,38 @@ export function AddRoomScreen() {
                 onSubmit={submit}
             >
                 <FormFieldSet title="Dados do quarto">
-                    <FormInput
+                    <FormInputMasked
                         label="Numero do quarto"
+                        mask="99999"
+                        replacement={{ 9: /\d/ }}
                         xs={12}
                         sm={6}
                         fieldState={getFieldState("number")}
                     />
 
-                    <FormInput
+                    <FormInputMasked
                         label="Qtd. camas de casal"
+                        mask="99"
+                        replacement={{ 9: /\d/ }}
                         xs={12}
                         sm={6}
                         fieldState={getFieldState("doubleBeds")}
                     />
 
-                    <FormInput
+                    <FormInputMasked
                         label="Qtd. camas de solteiro"
+                        mask="99"
+                        replacement={{ 9: /\d/ }}
                         xs={12}
                         sm={6}
                         fieldState={getFieldState("singleBeds")}
                     />
 
-                    <FormInput
+                    <FormInputNumber
                         label="Valor por diára"
+                        locales="pt-br"
+                        format="currency"
+                        currency="BRL"
                         xs={12}
                         sm={6}
                         fieldState={getFieldState("dailyRate")}

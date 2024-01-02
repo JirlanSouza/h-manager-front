@@ -13,4 +13,5 @@ setLocale({
     },
 });
 
+export const currencyNumber = (v: string) => parseFloat(v.replace("R$", ""));
 export * from "yup";

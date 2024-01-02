@@ -10,7 +10,7 @@ type InputProps = {
 
 export function FormCheckbox({
     label,
-    fieldState,
+    //fieldState,
     xs,
     sm,
     md,
@@ -22,7 +22,7 @@ export function FormCheckbox({
             <FormControlLabel
                 label={label}
                 control={<Checkbox size="small" />}
-                {...fieldState}
+                //{...fieldState}
             />
         </Grid>
     );

@@ -1,9 +1,30 @@
 import { Axios, AxiosError, HttpStatusCode } from "axios";
+import { createAxiosInstance } from "../../config/axiosConfig";
 import { Pageable } from "../../models/Pagination";
 import { ApiResponse, ApiResponseErrorDetail } from "./ApiResponse";
 
 export class ApiGatway {
-    constructor(private readonly axios: Axios) {}
+    private static instance: ApiGatway;
+    private axios: Axios;
+
+    static getInstance() {
+        if (!ApiGatway.instance) {
+            ApiGatway.instance = new ApiGatway();
+        }
+
+        return ApiGatway.instance;
+    }
+
+    private constructor() {
+        this.axios = createAxiosInstance(import.meta.env.VITE_API_BASE_URL);
+    }
+
+    setToken(token: string) {
+        this.axios = createAxiosInstance(
+            import.meta.env.VITE_API_BASE_URL,
+            token
+        );
+    }
 
     async get<T, K>(
         path: string,

@@ -1,9 +1,18 @@
 import axios, { AxiosError } from "axios";
 
-export function createAxiosInstance(baseUrl: string) {
-    const axiosInstace = axios.create({
+export function createAxiosInstance(baseUrl: string, token?: string) {
+    let axiosInstace = axios.create({
         baseURL: baseUrl,
     });
+
+    if (token) {
+        axiosInstace = axios.create({
+            baseURL: baseUrl,
+            headers: {
+                Authorization: "Bearer " + token,
+            },
+        });
+    }
 
     axiosInstace.interceptors.response.use(
         (r) => r,

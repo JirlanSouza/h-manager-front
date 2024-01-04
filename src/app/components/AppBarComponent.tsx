@@ -2,6 +2,7 @@ import {
     ChevronLeftRounded,
     DarkModeOutlined,
     LightModeOutlined,
+    LoginRounded,
     MenuRounded,
     SearchRounded,
 } from "@mui/icons-material";
@@ -10,6 +11,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { styled, useTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import hManagerLogo from "../../assets/h-manager-logo.svg";
 import { IconButton } from "../../common/components/IconButton.tsx";
 import { useColorMode } from "../../common/contexts/colorModeContext.tsx";
@@ -38,6 +40,7 @@ export function AppBarComponent({
 }: AppBarComponentProps) {
     const theme = useTheme();
     const { toggleColorMode, isLightMode } = useColorMode();
+    const navigate = useNavigate();
 
     return (
         <AppBar position="fixed" elevation={0}>
@@ -66,7 +69,11 @@ export function AppBarComponent({
                         ),
                     }}
                 />
-                <Box>
+                <Box display="flex" gap={2}>
+                    <IconButton onClick={() => navigate("/login")}>
+                        <LoginRounded />
+                    </IconButton>
+
                     <IconButton onClick={toggleColorMode}>
                         {isLightMode ? (
                             <DarkModeOutlined />

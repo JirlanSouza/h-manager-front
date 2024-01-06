@@ -1,0 +1,16 @@
+@use "sass:map";
+@import "./colors-light.scss";
+@import "./colors-dark.scss";
+
+
+:root {
+  @each $color-name, $color-value in $colors-light {
+    --color-#{$color-name}: #{$color-value};
+  }
+}
+
+html[data-theme=dark] {
+  @each $color-name, $color-value in $colors-dark {
+    --color-#{$color-name}: #{$color-value};
+  }
+}

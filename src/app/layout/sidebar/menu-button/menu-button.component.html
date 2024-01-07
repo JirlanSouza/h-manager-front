@@ -1,0 +1,4 @@
+<button [ngClass]="{ 'full-width': isFull, selected: selected }">
+  <icon icon="{{ icon }}" />
+  @if (isFull) { {{ label }} }
+</button>

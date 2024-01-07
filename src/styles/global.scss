@@ -2,9 +2,21 @@
 
 html,
 body {
+  background-color: var(--color-background);
+}
+
+* {
   margin: 0;
   padding: 0;
-  background-color: var(--color-background);
+  box-sizing: border-box;
+
+  color: var(--color-on-background);
+  transition: all .2s ease;
+}
+
+app-root {
   width: 100vw;
   height: 100vh;
+
+  display: flex;
 }

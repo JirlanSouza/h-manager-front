@@ -1,0 +1,19 @@
+<button class="open-menu" (click)="toggleOpen()">
+  <icon icon="menu"></icon>
+</button>
+
+<div>
+  <menu-button
+    label="Home"
+    icon="home"
+    [isFull]="open"
+    [selected]="true"
+  ></menu-button>
+  <menu-button label="Clientes" icon="groups" [isFull]="open"></menu-button>
+  <menu-button
+    label="Reservas"
+    icon="calendar_month"
+    [isFull]="open"
+  ></menu-button>
+  <menu-button label="Quartos" icon="king_bed" [isFull]="open"></menu-button>
+</div>

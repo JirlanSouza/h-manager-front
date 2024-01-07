@@ -1,0 +1,44 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  flex: 1;
+  max-width: max-content;
+  margin: .5rem;
+  padding: .5rem;
+  border-radius: 1rem;
+  background-color: var(--color-surface-container-low);
+
+}
+
+div {
+  border: none;
+  border-radius: 1rem;
+  background-color: var(--color-surface-container);
+  filter: brightness(1.1);
+}
+
+.open-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 3.6rem;
+  border: none;
+  border-radius: 1rem;
+
+  background-color: transparent;
+  filter: brightness(1.1);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-on-primary);
+  }
+
+  &.full-width {
+    width: 16rem;
+    justify-content: start;
+    gap: 1rem;
+    padding-left: 1rem;
+  }
+}

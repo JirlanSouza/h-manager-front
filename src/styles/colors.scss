@@ -4,12 +4,16 @@
 
 
 :root {
+  color-scheme: light;
+
   @each $color-name, $color-value in $colors-light {
     --color-#{$color-name}: #{$color-value};
   }
 }
 
-html[data-theme=dark] {
+html[theme-mode=dark] {
+  color-scheme: dark;
+
   @each $color-name, $color-value in $colors-dark {
     --color-#{$color-name}: #{$color-value};
   }

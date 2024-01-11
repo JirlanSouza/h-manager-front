@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .5rem;
+  flex: 1;
+
+  max-height: 4rem;
+  padding: .5rem;
+}

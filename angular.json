@@ -31,6 +31,11 @@
             "styles": [
               "src/styles/global.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/styles/components/"
+              ]
+            },
             "scripts": []
           },
           "configurations": {

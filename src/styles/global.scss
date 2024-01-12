@@ -24,38 +24,3 @@ app-root {
 
   display: flex;
 }
-
-@mixin buttonBase() {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: auto;
-  height: 2.75rem;
-  border: none;
-  border-radius: .75rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.75rem;
-
-  background-color: var(--color-surface-container-low);
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(1.1);
-  }
-
-  &:active {
-    transform: scale(.96);
-  }
-}
-
-.button {
-  @include buttonBase()
-}
-
-.icon-button {
-  @include buttonBase();
-  width: 2.75rem;
-  padding: .5rem;
-  font-size: .1rem;
-}
